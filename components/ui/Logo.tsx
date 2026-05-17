@@ -20,11 +20,15 @@ export function Logo({ size = "md", animate = false }: LogoProps) {
     hero: "0.5em",
   };
 
+  // letter-spacing adds trailing space after the last char, shifting the visual
+  // block left. paddingLeft compensates so the glyphs appear truly centered.
+  const compensate = { letterSpacing: letterSpacing[size], paddingLeft: letterSpacing[size] };
+
   if (!animate) {
     return (
       <div
         className={`font-black ${sizeClasses[size]} select-none`}
-        style={{ letterSpacing: letterSpacing[size] }}
+        style={compensate}
       >
         <div>KO</div>
         <div style={{ color: "#A78BFA" }}>DA</div>
@@ -35,7 +39,7 @@ export function Logo({ size = "md", animate = false }: LogoProps) {
   return (
     <div
       className={`font-black ${sizeClasses[size]} select-none`}
-      style={{ letterSpacing: letterSpacing[size] }}
+      style={compensate}
     >
       <motion.div
         initial={{ opacity: 0, y: -20 }}

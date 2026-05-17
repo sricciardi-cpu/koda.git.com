@@ -28,11 +28,18 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex flex-col items-center text-center gap-6">
+      {/*
+        Container sized to the logo's natural width.
+        Logo lines get paddingLeft = letterSpacing to compensate for CSS
+        trailing letter-spacing that shifts the visual block left.
+        Buttons use calc(100% + 3rem) to overflow the logo width
+        symmetrically by 1.5rem on each side.
+      */}
+      <div className="relative z-10 flex flex-col items-center gap-6 w-fit">
         <Logo size="hero" animate />
 
         <motion.p
-          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase"
+          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase w-max"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -42,19 +49,20 @@ export function Hero() {
 
         <motion.div
           className="flex gap-3 pt-2"
+          style={{ width: "calc(100% + 3rem)", marginLeft: "-1.5rem" }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
             href="#contacto"
-            className="inline-flex items-center gap-2 bg-[#A78BFA] text-black text-sm font-semibold px-7 py-3 hover:bg-[#A78BFA]/90 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+            className="flex-1 inline-flex items-center justify-center bg-[#A78BFA] text-black text-sm font-semibold py-3 hover:bg-[#A78BFA]/90 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
           >
             Hablemos
           </a>
           <a
             href="#servicios"
-            className="inline-flex items-center gap-2 border border-[rgba(255,255,255,0.15)] text-white text-sm px-7 py-3 hover:border-white/40 hover:bg-white/5 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+            className="flex-1 inline-flex items-center justify-center border border-[rgba(255,255,255,0.15)] text-white text-sm py-3 hover:border-white/40 hover:bg-white/5 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
           >
             Ver servicios
           </a>
