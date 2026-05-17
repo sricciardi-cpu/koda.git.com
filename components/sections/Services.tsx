@@ -66,7 +66,7 @@ function ServiceCard({
           <Icon
             size={22}
             strokeWidth={1.5}
-            className="text-[#555555] group-hover:text-[#FFE600] transition-colors duration-300 mt-1"
+            className="text-[#555555] group-hover:text-[#A78BFA] transition-colors duration-300 mt-1"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -94,7 +94,7 @@ export function Services() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16"
         >
-          <p className="text-[#FFE600] text-xs font-semibold tracking-widest uppercase mb-4">
+          <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
             ¿Qué hacemos?
           </p>
           <h2 className="text-4xl md:text-5xl font-black leading-tight max-w-md">

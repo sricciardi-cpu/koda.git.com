@@ -11,7 +11,7 @@ export function Logo({ size = "md", animate = false }: LogoProps) {
   const sizeClasses = {
     sm: "text-2xl leading-none",
     md: "text-4xl leading-none",
-    hero: "text-[clamp(8rem,18vw,20rem)] leading-none",
+    hero: "text-[clamp(5rem,10vw,9rem)] leading-none",
   };
 
   const letterSpacing = {
@@ -27,7 +27,7 @@ export function Logo({ size = "md", animate = false }: LogoProps) {
         style={{ letterSpacing: letterSpacing[size] }}
       >
         <div>KO</div>
-        <div>DA</div>
+        <div style={{ color: "#A78BFA" }}>DA</div>
       </div>
     );
   }
@@ -45,6 +45,7 @@ export function Logo({ size = "md", animate = false }: LogoProps) {
         KO
       </motion.div>
       <motion.div
+        style={{ color: "#A78BFA" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}

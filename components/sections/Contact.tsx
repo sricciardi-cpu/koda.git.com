@@ -87,7 +87,7 @@ export function Contact() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-16"
         >
-          <p className="text-[#FFE600] text-xs font-semibold tracking-widest uppercase mb-4">
+          <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
             Contacto
           </p>
           <h2 className="text-4xl md:text-5xl font-black leading-tight">
@@ -104,7 +104,7 @@ export function Contact() {
           >
             {status === "success" ? (
               <div className="flex flex-col items-start gap-4 py-12">
-                <CheckCircle size={40} className="text-[#FFE600]" />
+                <CheckCircle size={40} className="text-[#A78BFA]" />
                 <h3 className="text-2xl font-bold">Mensaje enviado.</h3>
                 <p className="text-[#888888]">
                   Te vamos a responder en menos de 24 horas.
@@ -230,7 +230,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex items-center justify-center gap-2 bg-[#FFE600] text-black text-sm font-semibold px-7 py-3 hover:bg-[#FFE600]/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] self-start"
+                  className="inline-flex items-center justify-center gap-2 bg-[#A78BFA] text-black text-sm font-semibold px-7 py-3 hover:bg-[#A78BFA]/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] self-start"
                 >
                   {status === "loading" ? (
                     "Enviando..."
@@ -282,15 +282,15 @@ export function Contact() {
               <h3 className="text-white font-semibold">¿Qué pasa después?</h3>
               <ol className="flex flex-col gap-2 text-sm text-[#888888]">
                 <li className="flex items-start gap-3">
-                  <span className="text-[#FFE600] font-semibold text-xs mt-0.5 shrink-0">01</span>
+                  <span className="text-[#A78BFA] font-semibold text-xs mt-0.5 shrink-0">01</span>
                   Leemos tu mensaje y lo analizamos.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#FFE600] font-semibold text-xs mt-0.5 shrink-0">02</span>
+                  <span className="text-[#A78BFA] font-semibold text-xs mt-0.5 shrink-0">02</span>
                   Coordinamos una llamada de 30 minutos.
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-[#FFE600] font-semibold text-xs mt-0.5 shrink-0">03</span>
+                  <span className="text-[#A78BFA] font-semibold text-xs mt-0.5 shrink-0">03</span>
                   Enviamos propuesta con alcance y presupuesto.
                 </li>
               </ol>

@@ -5,11 +5,24 @@ import { motion, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
-  { id: 1, title: "Proyecto próximamente", category: "Sitio web", span: "col-span-1 md:col-span-2 row-span-2" },
-  { id: 2, title: "Proyecto próximamente", category: "E-commerce", span: "col-span-1 row-span-1" },
-  { id: 3, title: "Proyecto próximamente", category: "App web", span: "col-span-1 row-span-1" },
-  { id: 4, title: "Proyecto próximamente", category: "Identidad digital", span: "col-span-1 row-span-1" },
-  { id: 5, title: "Proyecto próximamente", category: "Sitio web", span: "col-span-1 md:col-span-2 row-span-1" },
+  {
+    id: 1,
+    title: "Proyecto próximamente",
+    category: "Sitio web",
+    span: "col-span-1 md:col-span-2",
+  },
+  {
+    id: 2,
+    title: "Proyecto próximamente",
+    category: "E-commerce",
+    span: "col-span-1",
+  },
+  {
+    id: 3,
+    title: "Proyecto próximamente",
+    category: "App web",
+    span: "col-span-1 md:col-span-3",
+  },
 ];
 
 function ProjectCard({
@@ -25,25 +38,25 @@ function ProjectCard({
   return (
     <motion.div
       ref={ref}
-      className={`${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] cursor-pointer`}
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
+      className={`${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] cursor-pointer min-h-[280px]`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
         duration: 0.5,
-        delay: index * 0.08,
+        delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }}
-      whileHover={{ borderColor: "rgba(255,255,255,0.2)" }}
+      whileHover={{ borderColor: "rgba(167,139,250,0.3)" }}
     >
-      {/* Placeholder visual */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-16 h-16 border border-[rgba(255,255,255,0.06)] rounded-full" />
-        <div className="absolute w-8 h-8 border border-[rgba(255,255,255,0.04)] rounded-full" />
+      {/* Placeholder pattern */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-30">
+        <div className="w-20 h-20 border border-[rgba(255,255,255,0.06)] rounded-full" />
+        <div className="absolute w-10 h-10 border border-[rgba(255,255,255,0.04)] rounded-full" />
       </div>
 
       {/* Hover overlay */}
       <motion.div
-        className="absolute inset-0 bg-[#FFE600]/5"
+        className="absolute inset-0 bg-[#A78BFA]/5"
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
@@ -52,14 +65,14 @@ function ProjectCard({
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
         <div>
-          <p className="text-[#555555] text-xs font-medium uppercase tracking-widest mb-1">
+          <p className="text-[#555555] text-xs font-medium uppercase tracking-widest mb-1.5">
             {project.category}
           </p>
           <h3 className="text-white font-semibold text-sm">{project.title}</h3>
         </div>
         <ArrowUpRight
           size={18}
-          className="text-[#444444] group-hover:text-white transition-colors duration-200"
+          className="text-[#444444] group-hover:text-[#A78BFA] transition-colors duration-200 shrink-0"
         />
       </div>
     </motion.div>
@@ -85,7 +98,7 @@ export function Projects() {
           className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
-            <p className="text-[#FFE600] text-xs font-semibold tracking-widest uppercase mb-4">
+            <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
               Proyectos
             </p>
             <h2 className="text-4xl md:text-5xl font-black leading-tight">
@@ -100,7 +113,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}

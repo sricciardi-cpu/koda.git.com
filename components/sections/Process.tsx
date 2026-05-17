@@ -44,7 +44,7 @@ export function Process() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-20"
         >
-          <p className="text-[#FFE600] text-xs font-semibold tracking-widest uppercase mb-4">
+          <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
             Proceso
           </p>
           <h2 className="text-4xl md:text-5xl font-black leading-tight">
@@ -103,8 +103,8 @@ function StepCard({
       }}
     >
       {/* Dot on timeline */}
-      <div className="absolute -top-[0.4rem] left-0 w-3 h-3 bg-[#FFE600] rounded-full border-2 border-[#0a0a0a]" />
-      <span className="text-[#FFE600] text-xs font-semibold tracking-widest">
+      <div className="absolute -top-[0.4rem] left-0 w-3 h-3 bg-[#A78BFA] rounded-full border-2 border-[#0a0a0a]" />
+      <span className="text-[#A78BFA] text-xs font-semibold tracking-widest">
         {step.number}
       </span>
       <h3 className="text-white font-bold text-xl">{step.title}</h3>
@@ -139,7 +139,7 @@ function MobileStepCard({
     >
       {/* Line + dot */}
       <div className="flex flex-col items-center">
-        <div className="w-3 h-3 bg-[#FFE600] rounded-full shrink-0 border-2 border-[#0a0a0a] mt-1" />
+        <div className="w-3 h-3 bg-[#A78BFA] rounded-full shrink-0 border-2 border-[#0a0a0a] mt-1" />
         {!isLast && (
           <div className="w-px flex-1 bg-[rgba(255,255,255,0.08)] my-3" />
         )}
@@ -147,7 +147,7 @@ function MobileStepCard({
 
       {/* Content */}
       <div className={`flex flex-col gap-2 ${isLast ? "pb-0" : "pb-10"}`}>
-        <span className="text-[#FFE600] text-xs font-semibold tracking-widest">
+        <span className="text-[#A78BFA] text-xs font-semibold tracking-widest">
           {step.number}
         </span>
         <h3 className="text-white font-bold text-xl">{step.title}</h3>

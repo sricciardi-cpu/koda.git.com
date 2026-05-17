@@ -12,7 +12,7 @@ export function Hero() {
     >
       {/* Subtle grid background */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
@@ -23,16 +23,16 @@ export function Hero() {
 
       {/* Accent glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-[120px]"
-        style={{ background: "#FFE600" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[100px]"
+        style={{ background: "#A78BFA" }}
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex flex-col items-center text-center">
+      <div className="relative z-10 flex flex-col items-center text-center gap-6">
         <Logo size="hero" animate />
 
         <motion.p
-          className="mt-8 text-[#888888] text-lg md:text-xl font-light tracking-widest uppercase"
+          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -41,14 +41,14 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-10 flex gap-4"
+          className="flex gap-3 pt-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
             href="#contacto"
-            className="inline-flex items-center gap-2 bg-[#FFE600] text-black text-sm font-semibold px-7 py-3 hover:bg-[#FFE600]/90 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE600] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+            className="inline-flex items-center gap-2 bg-[#A78BFA] text-black text-sm font-semibold px-7 py-3 hover:bg-[#A78BFA]/90 active:scale-[0.98] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
           >
             Hablemos
           </a>
@@ -63,7 +63,7 @@ export function Hero() {
 
       {/* Scroll hint */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#555555]"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#444444]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1 }}
@@ -73,7 +73,7 @@ export function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={20} strokeWidth={1.5} />
+          <ChevronDown size={18} strokeWidth={1.5} />
         </motion.div>
       </motion.div>
     </section>
