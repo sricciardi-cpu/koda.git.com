@@ -34,18 +34,18 @@ const projects: Project[] = [
   {
     id: 3,
     title: "FeliRecetas",
-    category: "Aplicación web",
-    description: "Plataforma de recetas. Actualmente en desarrollo.",
+    category: "Landing page",
+    description: "Landing de recetas. Actualmente en producción.",
     url: null,
     badge: "En producción",
     span: "col-span-1 md:col-span-3",
   },
 ];
 
-// thum.io free screenshot endpoint (no API key needed for low-volume).
-// crop ratio matches the card visual aspect.
-function screenshotUrl(url: string, width = 1200) {
-  return `https://image.thum.io/get/width/${width}/crop/720/noanimate/${url}`;
+// Microlink — free tier (50 req/day per IP), no API key.
+// embed=screenshot.url makes the endpoint return the PNG directly.
+function screenshotUrl(url: string) {
+  return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
