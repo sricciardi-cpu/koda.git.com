@@ -13,6 +13,7 @@ export function Footer() {
             alt="Koda"
             width={44}
             height={44}
+            unoptimized
             className="object-contain select-none"
           />
         </a>

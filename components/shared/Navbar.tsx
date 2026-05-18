@@ -28,6 +28,7 @@ export function Navbar() {
             alt="Koda"
             width={40}
             height={40}
+            unoptimized
             className="object-contain select-none"
           />
         </a>

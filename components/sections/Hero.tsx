@@ -42,6 +42,7 @@ export function Hero() {
             alt="Koda"
             fill
             priority
+            unoptimized
             className="object-contain select-none"
           />
         </motion.div>
