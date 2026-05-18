@@ -31,9 +31,9 @@ function AnimatedLogo({ fast }: { fast: boolean }) {
   // On mobile we keep the duration generous so the animation is clearly
   // visible even after the initial JS load delay. A small delayChildren
   // also makes sure we don't try to animate before the page has painted.
-  const duration = fast ? 1.1 : 1.4;
-  const stagger = fast ? 0.09 : 0.12;
-  const delayChildren = fast ? 0.25 : 0.2;
+  const duration = fast ? 1.8 : 1.4;
+  const stagger = fast ? 0.15 : 0.12;
+  const delayChildren = fast ? 0.6 : 0.2;
   const letterVariants = makeVariants(duration);
 
   const containerVariants: Variants = {
@@ -70,10 +70,10 @@ export function Hero() {
 
   // Mobile delays line up with the longer (1.1s) letter animation so
   // the subtitle and buttons enter right as the logo settles.
-  const subtitleDelay = isMobile ? 1.5 : 1.7;
-  const buttonsDelay = isMobile ? 1.7 : 1.9;
-  const scrollDelay = isMobile ? 2.0 : 2.3;
-  const fadeDuration = isMobile ? 0.6 : 0.7;
+  const subtitleDelay = isMobile ? 2.6 : 1.7;
+  const buttonsDelay = isMobile ? 2.9 : 1.9;
+  const scrollDelay = isMobile ? 3.2 : 2.3;
+  const fadeDuration = isMobile ? 0.8 : 0.7;
 
   return (
     <section
