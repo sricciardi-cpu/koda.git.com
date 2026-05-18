@@ -14,6 +14,7 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string>("");
   const { scrollY } = useScroll();
   const bgOpacity = useTransform(scrollY, [0, 80], [0, 0.95]);
   const borderOpacity = useTransform(scrollY, [0, 80], [0, 0.08]);
@@ -29,6 +30,37 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Track which section is currently in view to highlight its nav link.
+  // We pick the section whose top is closest to (but past) the navbar offset.
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const compute = () => {
+      const offset = 100; // px from top, accounts for navbar height
+      let current = "";
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top - offset <= 0) {
+          current = section.id;
+        }
+      }
+      setActiveId(current);
+    };
+
+    compute();
+    window.addEventListener("scroll", compute, { passive: true });
+    window.addEventListener("resize", compute);
+    return () => {
+      window.removeEventListener("scroll", compute);
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
 
   return (
     <>
@@ -59,18 +91,29 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
-            {links.slice(0, -1).map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-[#888888] hover:text-white transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.slice(0, -1).map((link) => {
+              const isActive = activeId === link.href.slice(1);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm transition-colors duration-200 ${
+                    isActive
+                      ? "text-[#A78BFA]"
+                      : "text-[#888888] hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             <a
               href="#contacto"
-              className="text-sm border border-[rgba(255,255,255,0.15)] px-4 py-2 hover:border-white/40 hover:bg-white/5 transition-all duration-200"
+              className={`text-sm border px-4 py-2 transition-all duration-200 ${
+                activeId === "contacto"
+                  ? "text-[#A78BFA] border-[#A78BFA]/40 bg-[#A78BFA]/5"
+                  : "border-[rgba(255,255,255,0.15)] hover:border-white/40 hover:bg-white/5"
+              }`}
             >
               Contacto
             </a>
@@ -129,23 +172,28 @@ export function Navbar() {
                 visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
               }}
             >
-              {links.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-4xl font-black text-white hover:text-[#A78BFA] py-3 transition-colors duration-200"
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                >
-                  <span className="text-[#A78BFA] text-sm font-medium tracking-widest mr-3 align-middle">
-                    0{i + 1}
-                  </span>
-                  {link.label}
-                </motion.a>
-              ))}
+              {links.map((link, i) => {
+                const isActive = activeId === link.href.slice(1);
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={`text-4xl font-black py-3 transition-colors duration-200 ${
+                      isActive ? "text-[#A78BFA]" : "text-white hover:text-[#A78BFA]"
+                    }`}
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                  >
+                    <span className="text-[#A78BFA] text-sm font-medium tracking-widest mr-3 align-middle">
+                      0{i + 1}
+                    </span>
+                    {link.label}
+                  </motion.a>
+                );
+              })}
             </motion.nav>
 
             <div className="p-8 border-t border-[rgba(255,255,255,0.08)]">
