@@ -35,9 +35,9 @@ function makeVariants(duration: number): Record<"K" | "O" | "D" | "A", Variants>
 }
 
 function AnimatedLogo({ fast, play }: { fast: boolean; play: boolean }) {
-  const duration = fast ? 1.8 : 1.4;
-  const stagger = fast ? 0.15 : 0.12;
-  const delayChildren = fast ? 0.3 : 0.2;
+  const duration = fast ? 1.3 : 1.4;
+  const stagger = fast ? 0.11 : 0.12;
+  const delayChildren = fast ? 0.15 : 0.2;
   const letterVariants = makeVariants(duration);
 
   const containerVariants: Variants = {
@@ -84,10 +84,10 @@ export function Hero() {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const subtitleDelay = isMobile ? 2.6 : 1.7;
-  const buttonsDelay = isMobile ? 2.9 : 1.9;
-  const scrollDelay = isMobile ? 3.2 : 2.3;
-  const fadeDuration = isMobile ? 0.8 : 0.7;
+  const subtitleDelay = isMobile ? 1.8 : 1.7;
+  const buttonsDelay = isMobile ? 2.0 : 1.9;
+  const scrollDelay = isMobile ? 2.3 : 2.3;
+  const fadeDuration = isMobile ? 0.6 : 0.7;
 
   return (
     <section
