@@ -10,7 +10,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hoverable = false, className = "", children, ...props }, ref) => {
     const base =
-      "rounded-none border border-[rgba(255,255,255,0.08)] bg-[#111111] p-8";
+      "rounded-none border border-[rgba(255,255,255,0.08)] bg-[#111111] p-6 md:p-8";
 
     if (!hoverable) {
       return (

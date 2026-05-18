@@ -85,19 +85,19 @@ export function Services() {
   const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="servicios" className="py-32 px-6" aria-label="Servicios">
+    <section id="servicios" className="py-20 md:py-32 px-6" aria-label="Servicios">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+          className="mb-12 md:mb-16"
         >
           <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
             ¿Qué hacemos?
           </p>
-          <h2 className="text-4xl md:text-5xl font-black leading-tight max-w-md">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight max-w-md">
             Construimos presencia digital que importa.
           </h2>
         </motion.div>

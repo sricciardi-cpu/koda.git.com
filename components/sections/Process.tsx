@@ -35,19 +35,19 @@ export function Process() {
   const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="proceso" className="py-32 px-6" aria-label="Proceso">
+    <section id="proceso" className="py-20 md:py-32 px-6" aria-label="Proceso">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-20"
+          className="mb-12 md:mb-20"
         >
           <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
             Proceso
           </p>
-          <h2 className="text-4xl md:text-5xl font-black leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
             Cómo trabajamos.
           </h2>
         </motion.div>

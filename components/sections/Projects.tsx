@@ -114,7 +114,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     </>
   );
 
-  const wrapperClass = `${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[320px] ${
+  const wrapperClass = `${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[240px] md:min-h-[320px] ${
     hasLink ? "cursor-pointer hover:border-[#A78BFA]/30" : "cursor-default"
   } transition-colors duration-300`;
 
@@ -155,7 +155,7 @@ export function Projects() {
   return (
     <section
       id="proyectos"
-      className="py-32 px-6 bg-[#111111]"
+      className="py-20 md:py-32 px-6 bg-[#111111]"
       aria-label="Proyectos"
     >
       <div className="max-w-7xl mx-auto">
@@ -164,13 +164,13 @@ export function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
             <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
               Proyectos
             </p>
-            <h2 className="text-4xl md:text-5xl font-black leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
               Trabajo real.
               <br />
               Resultados reales.

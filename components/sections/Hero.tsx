@@ -115,11 +115,11 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex flex-col items-center gap-8">
+      <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 w-full max-w-xs sm:max-w-md">
         <AnimatedLogo />
 
         <motion.p
-          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase text-center"
+          className="text-[#888888] text-xs sm:text-base md:text-lg font-light tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center px-2"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.7, ease: [0.22, 1, 0.36, 1] }}
