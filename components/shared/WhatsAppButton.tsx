@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function WhatsAppButton() {
+  const isMobile = useIsMobile();
+
   return (
     <motion.a
       href={whatsappLink(
@@ -16,7 +19,7 @@ export function WhatsAppButton() {
       className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white shadow-[0_8px_30px_rgba(37,211,102,0.35)] hover:shadow-[0_8px_40px_rgba(37,211,102,0.55)] hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
       initial={{ opacity: 0, scale: 0, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: isMobile ? 1.5 : 2.5, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* Subtle pulse ring */}
       <motion.span
