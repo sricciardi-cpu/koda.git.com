@@ -26,7 +26,7 @@ export function Footer() {
             aria-label="Koda en Instagram"
           >
             <AtSign size={16} />
-            @koda.git
+            koda.git
           </a>
           <a href="#servicios" className="hover:text-white transition-colors duration-200">
             Servicios
