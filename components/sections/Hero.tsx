@@ -28,9 +28,12 @@ function makeVariants(duration: number): Record<"K" | "O" | "D" | "A", Variants>
 }
 
 function AnimatedLogo({ fast }: { fast: boolean }) {
-  const duration = fast ? 0.7 : 1.4;
-  const stagger = fast ? 0.07 : 0.12;
-  const delayChildren = fast ? 0.05 : 0.2;
+  // On mobile we keep the duration generous so the animation is clearly
+  // visible even after the initial JS load delay. A small delayChildren
+  // also makes sure we don't try to animate before the page has painted.
+  const duration = fast ? 1.1 : 1.4;
+  const stagger = fast ? 0.09 : 0.12;
+  const delayChildren = fast ? 0.25 : 0.2;
   const letterVariants = makeVariants(duration);
 
   const containerVariants: Variants = {
@@ -65,11 +68,12 @@ function AnimatedLogo({ fast }: { fast: boolean }) {
 export function Hero() {
   const isMobile = useIsMobile();
 
-  // On mobile, compress all delays so the page feels snappy
-  const subtitleDelay = isMobile ? 0.9 : 1.7;
-  const buttonsDelay = isMobile ? 1.1 : 1.9;
-  const scrollDelay = isMobile ? 1.4 : 2.3;
-  const fadeDuration = isMobile ? 0.4 : 0.7;
+  // Mobile delays line up with the longer (1.1s) letter animation so
+  // the subtitle and buttons enter right as the logo settles.
+  const subtitleDelay = isMobile ? 1.5 : 1.7;
+  const buttonsDelay = isMobile ? 1.7 : 1.9;
+  const scrollDelay = isMobile ? 2.0 : 2.3;
+  const fadeDuration = isMobile ? 0.6 : 0.7;
 
   return (
     <section

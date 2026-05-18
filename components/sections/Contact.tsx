@@ -20,7 +20,7 @@ type Status = "idle" | "success";
 
 export function Contact() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
+  const titleInView = useInView(titleRef, { once: true, margin: "150px" });
 
   const [form, setForm] = useState<ContactFormData>({
     name: "",
@@ -90,7 +90,7 @@ export function Contact() {
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 md:mb-16"
         >
           <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
@@ -106,7 +106,7 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={titleInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.35, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           >
             {status === "success" ? (
               <div className="flex flex-col items-start gap-4 py-12">
@@ -245,7 +245,7 @@ export function Contact() {
             className="flex flex-col gap-8 lg:gap-10 lg:pl-12 lg:border-l lg:border-[rgba(255,255,255,0.08)]"
             initial={{ opacity: 0, x: 20 }}
             animate={titleInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.35, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div>
               <h3 className="text-white font-semibold mb-4">

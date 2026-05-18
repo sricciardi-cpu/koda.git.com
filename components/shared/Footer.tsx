@@ -128,7 +128,7 @@ export function Footer() {
           <p className="text-xs text-[#555555]">
             © {year} Koda. Todos los derechos reservados.
           </p>
-          <p className="text-xs text-[#555555]">Hecho con ♥ en Argentina</p>
+          <p className="text-xs text-[#555555]"></p>
         </div>
       </div>
     </footer>

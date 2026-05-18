@@ -32,7 +32,7 @@ const steps = [
 
 export function Process() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
+  const titleInView = useInView(titleRef, { once: true, margin: "150px" });
 
   return (
     <section id="proceso" className="py-20 md:py-32 px-6" aria-label="Proceso">
@@ -41,7 +41,7 @@ export function Process() {
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 md:mb-20"
         >
           <p className="text-[#A78BFA] text-xs font-semibold tracking-widest uppercase mb-4">
@@ -88,7 +88,7 @@ function StepCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "150px" });
 
   return (
     <motion.div
@@ -97,8 +97,8 @@ function StepCard({
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.5,
-        delay: index * 0.1,
+        duration: 0.35,
+        delay: index * 0.05,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -123,7 +123,7 @@ function MobileStepCard({
   isLast: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "150px" });
 
   return (
     <motion.div
@@ -132,8 +132,8 @@ function MobileStepCard({
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{
-        duration: 0.5,
-        delay: index * 0.1,
+        duration: 0.35,
+        delay: index * 0.05,
         ease: [0.16, 1, 0.3, 1],
       }}
     >

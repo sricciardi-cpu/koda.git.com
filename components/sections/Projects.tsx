@@ -50,7 +50,7 @@ function screenshotUrl(url: string) {
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "150px" });
   const hasLink = Boolean(project.url);
 
   const inner = (
@@ -124,8 +124,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.5,
-        delay: index * 0.1,
+        duration: 0.35,
+        delay: index * 0.05,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -150,7 +150,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-80px" });
+  const titleInView = useInView(titleRef, { once: true, margin: "150px" });
 
   return (
     <section
@@ -163,7 +163,7 @@ export function Projects() {
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
