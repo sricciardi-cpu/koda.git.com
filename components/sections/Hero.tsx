@@ -38,7 +38,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Koda"
             fill
             priority
