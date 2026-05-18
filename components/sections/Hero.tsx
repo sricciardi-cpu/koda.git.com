@@ -3,49 +3,54 @@
 import { motion, type Variants } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-// Each letter slides in from its outer edge toward the center 2x2 grid.
-// K (top-left)  ← falls from above
-// O (top-right) ← comes from the right
-// D (bot-left)  ← rises from below
-// A (bot-right) ← comes from the left
+// Each letter travels from its respective viewport edge to its grid slot.
+// 60vw/60vh is more than enough to start fully off-screen on any device,
+// while keeping the motion duration reasonable.
+// K (top-left)  ← from top edge
+// O (top-right) ← from right edge
+// D (bot-left)  ← from bottom edge
+// A (bot-right) ← from left edge
+const SMOOTH_EASE = [0.22, 1, 0.36, 1] as const;
+const DURATION = 1.4;
+
 const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
   },
 };
 
 const letterVariants: Record<"K" | "O" | "D" | "A", Variants> = {
   K: {
-    hidden: { y: "-120%", opacity: 0 },
+    hidden: { y: "-60vh", opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: DURATION, ease: SMOOTH_EASE },
     },
   },
   O: {
-    hidden: { x: "120%", opacity: 0 },
+    hidden: { x: "60vw", opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: DURATION, ease: SMOOTH_EASE },
     },
   },
   D: {
-    hidden: { y: "120%", opacity: 0 },
+    hidden: { y: "60vh", opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: DURATION, ease: SMOOTH_EASE },
     },
   },
   A: {
-    hidden: { x: "-120%", opacity: 0 },
+    hidden: { x: "-60vw", opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: DURATION, ease: SMOOTH_EASE },
     },
   },
 };
@@ -55,9 +60,10 @@ function AnimatedLogo() {
     "flex items-center justify-center font-black leading-none select-none";
   const fontSize = "text-[clamp(5rem,11vw,9.5rem)]";
 
+  // No overflow-hidden anywhere — letters need to travel the full viewport.
   return (
     <motion.div
-      className="grid grid-cols-2 grid-rows-2 gap-0 overflow-hidden"
+      className="grid grid-cols-2 grid-rows-2 gap-0"
       style={{ width: "clamp(200px, 28vw, 380px)", aspectRatio: "1" }}
       variants={containerVariants}
       initial="hidden"
@@ -65,7 +71,7 @@ function AnimatedLogo() {
       aria-label="Koda"
       role="img"
     >
-      <div className="overflow-hidden flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <motion.span
           variants={letterVariants.K}
           className={`${letterClasses} ${fontSize} text-white`}
@@ -73,7 +79,7 @@ function AnimatedLogo() {
           K
         </motion.span>
       </div>
-      <div className="overflow-hidden flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <motion.span
           variants={letterVariants.O}
           className={`${letterClasses} ${fontSize} text-white`}
@@ -81,7 +87,7 @@ function AnimatedLogo() {
           O
         </motion.span>
       </div>
-      <div className="overflow-hidden flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <motion.span
           variants={letterVariants.D}
           className={`${letterClasses} ${fontSize} text-[#A78BFA]`}
@@ -89,7 +95,7 @@ function AnimatedLogo() {
           D
         </motion.span>
       </div>
-      <div className="overflow-hidden flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <motion.span
           variants={letterVariants.A}
           className={`${letterClasses} ${fontSize} text-[#A78BFA]`}
@@ -132,7 +138,7 @@ export function Hero() {
           className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 1.7, ease: [0.22, 1, 0.36, 1] }}
         >
           Desarrollo web para los que quieren más
         </motion.p>
@@ -141,7 +147,7 @@ export function Hero() {
           className="flex gap-3 w-full"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 1.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <a
             href="#contacto"
@@ -163,7 +169,7 @@ export function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#444444]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
+        transition={{ duration: 0.8, delay: 2.3 }}
         aria-hidden="true"
       >
         <motion.div
