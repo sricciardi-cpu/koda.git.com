@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Logo } from "@/components/ui/Logo";
 
 export function Navbar() {
   const { scrollY } = useScroll();
@@ -22,7 +22,15 @@ export function Navbar() {
         style={{ opacity: bgOpacity }}
       />
       <nav className="relative max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Logo size="sm" />
+        <a href="#" aria-label="Koda — inicio">
+          <Image
+            src="/logo.png"
+            alt="Koda"
+            width={40}
+            height={40}
+            className="object-contain select-none"
+          />
+        </a>
         <div className="flex items-center gap-8">
           <a
             href="#servicios"

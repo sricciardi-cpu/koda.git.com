@@ -26,7 +26,7 @@ export default function Icon() {
             fontSize: 26,
             fontWeight: 900,
             lineHeight: 1,
-            letterSpacing: "8px",
+            letterSpacing: "4px",
           }}
         >
           KO
@@ -37,8 +37,8 @@ export default function Icon() {
             fontSize: 26,
             fontWeight: 900,
             lineHeight: 1,
-            letterSpacing: "8px",
-            marginTop: 2,
+            letterSpacing: "4px",
+            marginTop: 1,
           }}
         >
           DA

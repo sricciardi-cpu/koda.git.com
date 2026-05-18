@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { AtSign } from "lucide-react";
-import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -7,7 +7,15 @@ export function Footer() {
   return (
     <footer className="border-t border-[rgba(255,255,255,0.08)] py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <Logo size="sm" />
+        <a href="#" aria-label="Koda — inicio">
+          <Image
+            src="/logo.png"
+            alt="Koda"
+            width={44}
+            height={44}
+            className="object-contain select-none"
+          />
+        </a>
         <div className="flex flex-col md:flex-row items-start md:items-center gap-6 text-sm text-[#888888]">
           <a
             href="https://instagram.com/koda.git"
@@ -19,22 +27,13 @@ export function Footer() {
             <AtSign size={16} />
             @koda.git
           </a>
-          <a
-            href="#servicios"
-            className="hover:text-white transition-colors duration-200"
-          >
+          <a href="#servicios" className="hover:text-white transition-colors duration-200">
             Servicios
           </a>
-          <a
-            href="#proyectos"
-            className="hover:text-white transition-colors duration-200"
-          >
+          <a href="#proyectos" className="hover:text-white transition-colors duration-200">
             Proyectos
           </a>
-          <a
-            href="#contacto"
-            className="hover:text-white transition-colors duration-200"
-          >
+          <a href="#contacto" className="hover:text-white transition-colors duration-200">
             Contacto
           </a>
         </div>
