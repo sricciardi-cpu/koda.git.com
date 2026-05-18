@@ -56,50 +56,34 @@ const letterVariants: Record<"K" | "O" | "D" | "A", Variants> = {
 };
 
 function AnimatedLogo() {
-  const letterClasses =
-    "flex items-center justify-center font-black leading-none select-none";
-  const fontSize = "text-[clamp(5rem,11vw,9.5rem)]";
+  // Tight font-weight + character-width based packing.
+  // No grid cells = letters hug each other side-by-side.
+  // leading 0.82 + -tracking pulls the two rows almost into contact.
+  const letter =
+    "font-black leading-[0.82] select-none text-[clamp(5.5rem,13vw,11rem)] tracking-[-0.04em]";
 
-  // No overflow-hidden anywhere — letters need to travel the full viewport.
   return (
     <motion.div
-      className="grid grid-cols-2 grid-rows-2 gap-0"
-      style={{ width: "clamp(200px, 28vw, 380px)", aspectRatio: "1" }}
+      className="flex flex-col items-center"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       aria-label="Koda"
       role="img"
     >
-      <div className="flex items-center justify-center">
-        <motion.span
-          variants={letterVariants.K}
-          className={`${letterClasses} ${fontSize} text-white`}
-        >
+      <div className="flex">
+        <motion.span variants={letterVariants.K} className={`${letter} text-white`}>
           K
         </motion.span>
-      </div>
-      <div className="flex items-center justify-center">
-        <motion.span
-          variants={letterVariants.O}
-          className={`${letterClasses} ${fontSize} text-white`}
-        >
+        <motion.span variants={letterVariants.O} className={`${letter} text-white`}>
           O
         </motion.span>
       </div>
-      <div className="flex items-center justify-center">
-        <motion.span
-          variants={letterVariants.D}
-          className={`${letterClasses} ${fontSize} text-[#A78BFA]`}
-        >
+      <div className="flex">
+        <motion.span variants={letterVariants.D} className={`${letter} text-[#A78BFA]`}>
           D
         </motion.span>
-      </div>
-      <div className="flex items-center justify-center">
-        <motion.span
-          variants={letterVariants.A}
-          className={`${letterClasses} ${fontSize} text-[#A78BFA]`}
-        >
+        <motion.span variants={letterVariants.A} className={`${letter} text-[#A78BFA]`}>
           A
         </motion.span>
       </div>

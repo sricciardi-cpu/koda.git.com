@@ -9,7 +9,7 @@ export default function Icon() {
     (
       <div
         style={{
-          background: "#0a0a0a",
+          background: "transparent",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -17,7 +17,6 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           fontFamily: "sans-serif",
-          paddingLeft: "4px",
         }}
       >
         <span
