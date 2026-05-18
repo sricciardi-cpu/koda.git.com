@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#0a0a0a"/>
+  <text
+    x="200"
+    y="188"
+    font-family="Inter, Arial, sans-serif"
+    font-weight="900"
+    font-size="148"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    letter-spacing="36"
+    dx="18"
+  >KO</text>
+  <text
+    x="200"
+    y="336"
+    font-family="Inter, Arial, sans-serif"
+    font-weight="900"
+    font-size="148"
+    fill="#A78BFA"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    letter-spacing="36"
+    dx="18"
+  >DA</text>
+</svg>

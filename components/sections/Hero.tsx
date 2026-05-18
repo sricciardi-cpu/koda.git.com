@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Logo } from "@/components/ui/Logo";
 
 export function Hero() {
   return (
@@ -28,31 +28,39 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/*
-        Container sized to the logo's natural width.
-        Logo lines get paddingLeft = letterSpacing to compensate for CSS
-        trailing letter-spacing that shifts the visual block left.
-        Buttons use calc(100% + 3rem) to overflow the logo width
-        symmetrically by 1.5rem on each side.
-      */}
-      <div className="relative z-10 flex flex-col items-center gap-6 w-fit">
-        <Logo size="hero" animate />
+      <div className="relative z-10 flex flex-col items-center gap-8">
+        {/* Logo image — stagger KO/DA via clip animation */}
+        <motion.div
+          className="relative"
+          style={{ width: "clamp(200px, 28vw, 380px)", aspectRatio: "1" }}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <Image
+            src="/logo.svg"
+            alt="Koda"
+            fill
+            priority
+            className="object-contain select-none"
+          />
+        </motion.div>
 
         <motion.p
-          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase w-max"
+          className="text-[#888888] text-base md:text-lg font-light tracking-[0.2em] uppercase text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
           Desarrollo web para los que quieren más
         </motion.p>
 
+        {/* Buttons match logo width + slight overflow */}
         <motion.div
-          className="flex gap-3 pt-2"
-          style={{ width: "calc(100% + 3rem)", marginLeft: "-1.5rem" }}
+          className="flex gap-3 w-full"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
             href="#contacto"
