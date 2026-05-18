@@ -2,43 +2,125 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 
-const projects = [
+type Project = {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  url: string | null;
+  badge?: string;
+  span: string;
+};
+
+const projects: Project[] = [
   {
     id: 1,
-    title: "Proyecto próximamente",
-    category: "Sitio web",
+    title: "Camisetas Zeus",
+    category: "E-commerce",
+    description: "Tienda online de indumentaria deportiva.",
+    url: "https://camisetaszeus.com",
     span: "col-span-1 md:col-span-2",
   },
   {
     id: 2,
-    title: "Proyecto próximamente",
-    category: "E-commerce",
+    title: "Francisco Di Rago",
+    category: "Sitio web profesional",
+    description: "Asesor inmobiliario.",
+    url: "https://francisco-di-rago-web.vercel.app/",
     span: "col-span-1",
   },
   {
     id: 3,
-    title: "Proyecto próximamente",
-    category: "App web",
+    title: "FeliRecetas",
+    category: "Aplicación web",
+    description: "Plataforma de recetas. Actualmente en desarrollo.",
+    url: null,
+    badge: "En producción",
     span: "col-span-1 md:col-span-3",
   },
 ];
 
-function ProjectCard({
-  project,
-  index,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-}) {
+// thum.io free screenshot endpoint (no API key needed for low-volume).
+// crop ratio matches the card visual aspect.
+function screenshotUrl(url: string, width = 1200) {
+  return `https://image.thum.io/get/width/${width}/crop/720/noanimate/${url}`;
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const hasLink = Boolean(project.url);
+
+  const inner = (
+    <>
+      {/* Background — screenshot if link exists, abstract pattern otherwise */}
+      {hasLink ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={screenshotUrl(project.url!)}
+          alt={`${project.title} preview`}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-top opacity-50 group-hover:opacity-70 transition-opacity duration-500"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center opacity-30">
+          <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
+          <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
+        </div>
+      )}
+
+      {/* Dark gradient overlay for legibility */}
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent"
+        aria-hidden="true"
+      />
+
+      {/* Hover accent overlay */}
+      <motion.div
+        className="absolute inset-0 bg-[#A78BFA]/0 group-hover:bg-[#A78BFA]/5 transition-colors duration-300"
+        aria-hidden="true"
+      />
+
+      {/* Badge top-right (only when no link) */}
+      {project.badge && (
+        <div className="absolute top-5 right-5 flex items-center gap-1.5 bg-[#A78BFA]/10 border border-[#A78BFA]/30 text-[#A78BFA] text-[10px] font-medium uppercase tracking-widest px-2.5 py-1">
+          <Clock size={11} />
+          {project.badge}
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-1.5 min-w-0">
+          <p className="text-[#A78BFA] text-[10px] font-semibold uppercase tracking-widest">
+            {project.category}
+          </p>
+          <h3 className="text-white font-bold text-lg md:text-xl truncate">
+            {project.title}
+          </h3>
+          <p className="text-[#888888] text-xs leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+        {hasLink && (
+          <ArrowUpRight
+            size={20}
+            className="text-[#666666] group-hover:text-[#A78BFA] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200 shrink-0"
+          />
+        )}
+      </div>
+    </>
+  );
+
+  const wrapperClass = `${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[320px] ${
+    hasLink ? "cursor-pointer hover:border-[#A78BFA]/30" : "cursor-default"
+  } transition-colors duration-300`;
 
   return (
     <motion.div
       ref={ref}
-      className={`${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] cursor-pointer min-h-[280px]`}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
@@ -46,35 +128,22 @@ function ProjectCard({
         delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }}
-      whileHover={{ borderColor: "rgba(167,139,250,0.3)" }}
     >
-      {/* Placeholder pattern */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        <div className="w-20 h-20 border border-[rgba(255,255,255,0.06)] rounded-full" />
-        <div className="absolute w-10 h-10 border border-[rgba(255,255,255,0.04)] rounded-full" />
-      </div>
-
-      {/* Hover overlay */}
-      <motion.div
-        className="absolute inset-0 bg-[#A78BFA]/5"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.2 }}
-      />
-
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-        <div>
-          <p className="text-[#555555] text-xs font-medium uppercase tracking-widest mb-1.5">
-            {project.category}
-          </p>
-          <h3 className="text-white font-semibold text-sm">{project.title}</h3>
+      {hasLink ? (
+        <a
+          href={project.url!}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={wrapperClass + " block h-full"}
+          aria-label={`Visitar ${project.title}`}
+        >
+          {inner}
+        </a>
+      ) : (
+        <div className={wrapperClass + " h-full"} aria-label={project.title}>
+          {inner}
         </div>
-        <ArrowUpRight
-          size={18}
-          className="text-[#444444] group-hover:text-[#A78BFA] transition-colors duration-200 shrink-0"
-        />
-      </div>
+      )}
     </motion.div>
   );
 }
@@ -108,8 +177,8 @@ export function Projects() {
             </h2>
           </div>
           <p className="text-[#888888] text-sm max-w-xs leading-relaxed">
-            Portafolio en construcción. Pronto vas a poder ver los proyectos que
-            estamos desarrollando.
+            Algunos proyectos en los que estamos trabajando o que ya están en
+            producción.
           </p>
         </motion.div>
 
