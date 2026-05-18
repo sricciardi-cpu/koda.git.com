@@ -1,39 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const SMOOTH_EASE = [0.22, 1, 0.36, 1] as const;
 
+// Use fixed pixel offsets instead of vh/vw — Safari iOS has known issues
+// applying viewport units inside transforms during early page lifecycle,
+// which can cause the animation to silently skip. 1200px is enough to
+// guarantee off-screen start on all phones and tablets.
+const OFFSET = 1200;
+
 function makeVariants(duration: number): Record<"K" | "O" | "D" | "A", Variants> {
   return {
     K: {
-      hidden: { y: "-60vh", opacity: 0 },
+      hidden: { y: -OFFSET, opacity: 0 },
       visible: { y: 0, opacity: 1, transition: { duration, ease: SMOOTH_EASE } },
     },
     O: {
-      hidden: { x: "60vw", opacity: 0 },
+      hidden: { x: OFFSET, opacity: 0 },
       visible: { x: 0, opacity: 1, transition: { duration, ease: SMOOTH_EASE } },
     },
     D: {
-      hidden: { y: "60vh", opacity: 0 },
+      hidden: { y: OFFSET, opacity: 0 },
       visible: { y: 0, opacity: 1, transition: { duration, ease: SMOOTH_EASE } },
     },
     A: {
-      hidden: { x: "-60vw", opacity: 0 },
+      hidden: { x: -OFFSET, opacity: 0 },
       visible: { x: 0, opacity: 1, transition: { duration, ease: SMOOTH_EASE } },
     },
   };
 }
 
-function AnimatedLogo({ fast }: { fast: boolean }) {
-  // On mobile we keep the duration generous so the animation is clearly
-  // visible even after the initial JS load delay. A small delayChildren
-  // also makes sure we don't try to animate before the page has painted.
+function AnimatedLogo({ fast, play }: { fast: boolean; play: boolean }) {
   const duration = fast ? 1.8 : 1.4;
   const stagger = fast ? 0.15 : 0.12;
-  const delayChildren = fast ? 0.6 : 0.2;
+  const delayChildren = fast ? 0.3 : 0.2;
   const letterVariants = makeVariants(duration);
 
   const containerVariants: Variants = {
@@ -49,7 +53,7 @@ function AnimatedLogo({ fast }: { fast: boolean }) {
       className="flex flex-col items-center"
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      animate={play ? "visible" : "hidden"}
       aria-label="Koda"
       role="img"
     >
@@ -68,8 +72,18 @@ function AnimatedLogo({ fast }: { fast: boolean }) {
 export function Hero() {
   const isMobile = useIsMobile();
 
-  // Mobile delays line up with the longer (1.1s) letter animation so
-  // the subtitle and buttons enter right as the logo settles.
+  // Wait until after hydration to start the animation. This guarantees the
+  // animation plays even on slow Safari iOS loads (where the page might
+  // paint the SSR'd "hidden" state first, then JS attaches late), and also
+  // avoids switching variants mid-animation when useIsMobile resolves.
+  const [play, setPlay] = useState(false);
+  useEffect(() => {
+    // requestAnimationFrame defers to the next paint so the browser shows
+    // the hidden state for at least one frame before transitioning.
+    const id = requestAnimationFrame(() => setPlay(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   const subtitleDelay = isMobile ? 2.6 : 1.7;
   const buttonsDelay = isMobile ? 2.9 : 1.9;
   const scrollDelay = isMobile ? 3.2 : 2.3;
@@ -99,12 +113,12 @@ export function Hero() {
       />
 
       <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 w-full max-w-xs sm:max-w-md">
-        <AnimatedLogo fast={isMobile} />
+        <AnimatedLogo fast={isMobile} play={play} />
 
         <motion.p
           className="text-[#888888] text-xs sm:text-base md:text-lg font-light tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center px-2"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={play ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: fadeDuration, delay: subtitleDelay, ease: [0.22, 1, 0.36, 1] }}
         >
           Desarrollo web para los que quieren más
@@ -113,7 +127,7 @@ export function Hero() {
         <motion.div
           className="flex gap-3 w-full"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={play ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: fadeDuration, delay: buttonsDelay, ease: [0.22, 1, 0.36, 1] }}
         >
           <a
@@ -135,7 +149,7 @@ export function Hero() {
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#444444]"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={play ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: scrollDelay }}
         aria-hidden="true"
       >
