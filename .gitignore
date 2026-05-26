@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Default Next.js favicon — we use app/icon.png instead
+/app/favicon.ico
