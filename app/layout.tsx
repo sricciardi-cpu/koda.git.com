@@ -10,7 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://koda.git.com"),
+  metadataBase: new URL("https://www.kodagit.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "Koda — Desarrollo web para los que quieren más",
     template: "%s | Koda",
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_AR",
-    url: "https://koda.git.com",
+    url: "https://www.kodagit.com",
     siteName: "Koda",
     title: "Koda — Desarrollo web para los que quieren más",
     description:
@@ -64,7 +67,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Koda",
-              url: "https://koda.git.com",
+              url: "https://www.kodagit.com",
               description:
                 "Agencia de desarrollo web especializada en sitios a medida, e-commerce, aplicaciones web e identidad digital.",
               sameAs: ["https://instagram.com/koda.git"],

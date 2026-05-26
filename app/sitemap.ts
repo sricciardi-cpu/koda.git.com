@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://koda.git.com",
+      url: "https://www.kodagit.com",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
