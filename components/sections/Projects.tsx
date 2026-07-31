@@ -10,6 +10,8 @@ type Project = {
   category: string;
   description: string;
   url: string | null;
+  /** Brand logo shown darkened behind cards that have no live URL yet. */
+  logo?: string;
   badge?: string;
   span: string;
 };
@@ -37,6 +39,7 @@ const projects: Project[] = [
     category: "Landing page",
     description: "Blanquería y textiles para el hogar.",
     url: null,
+    logo: "/projects/sillorno.png",
     badge: "En producción",
     span: "col-span-1",
   },
@@ -46,6 +49,7 @@ const projects: Project[] = [
     category: "E-commerce",
     description: "Tienda online de perfumes.",
     url: null,
+    logo: "/projects/rove.png",
     badge: "En producción",
     span: "col-span-1 md:col-span-2",
   },
@@ -74,15 +78,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="absolute inset-0 w-full h-full object-cover object-top opacity-50 group-hover:opacity-70 transition-opacity duration-500"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
-          <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
-          <span
-            className="absolute text-[#222222] text-6xl font-black select-none group-hover:text-[#2a2a2a] transition-colors duration-300"
-            aria-hidden="true"
-          >
-            {project.title.charAt(0)}
-          </span>
+        <div className="absolute inset-0 flex items-center justify-center p-10 pb-24">
+          {project.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.logo}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              className="max-h-full max-w-[70%] object-contain opacity-[0.22] group-hover:opacity-[0.35] transition-opacity duration-500"
+            />
+          ) : (
+            <>
+              <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
+              <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
+            </>
+          )}
         </div>
       )}
 
