@@ -33,12 +33,21 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "FeliRecetas",
+    title: "Sillorno",
     category: "Landing page",
-    description: "Landing de recetas. Actualmente en producción.",
+    description: "Blanquería y textiles para el hogar.",
     url: null,
     badge: "En producción",
-    span: "col-span-1 md:col-span-3",
+    span: "col-span-1",
+  },
+  {
+    id: 4,
+    title: "Rove",
+    category: "E-commerce",
+    description: "Tienda online de perfumes.",
+    url: null,
+    badge: "En producción",
+    span: "col-span-1 md:col-span-2",
   },
 ];
 
@@ -65,9 +74,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="absolute inset-0 w-full h-full object-cover object-top opacity-50 group-hover:opacity-70 transition-opacity duration-500"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center opacity-30">
+        <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
           <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
+          <span
+            className="absolute text-[#222222] text-6xl font-black select-none group-hover:text-[#2a2a2a] transition-colors duration-300"
+            aria-hidden="true"
+          >
+            {project.title.charAt(0)}
+          </span>
         </div>
       )}
 
@@ -114,13 +129,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     </>
   );
 
-  const wrapperClass = `${project.span} relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[240px] md:min-h-[320px] ${
+  // The span classes must live on the grid's direct child (this motion.div),
+  // not on the inner anchor, or the grid ignores them and every card
+  // collapses to a single column.
+  const wrapperClass = `relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[240px] md:min-h-[320px] ${
     hasLink ? "cursor-pointer hover:border-[#A78BFA]/30" : "cursor-default"
   } transition-colors duration-300`;
 
   return (
     <motion.div
       ref={ref}
+      className={project.span}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
