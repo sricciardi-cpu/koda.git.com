@@ -261,10 +261,10 @@ export function Contact() {
                   className="inline-flex items-center gap-3 text-[#888888] hover:text-white transition-colors duration-200 group"
                   aria-label="Contactar por WhatsApp"
                 >
-                  <div className="w-10 h-10 border border-[rgba(255,255,255,0.08)] flex items-center justify-center group-hover:border-[#25D366]/40 transition-colors duration-200">
+                  <div className="w-10 h-10 border border-[rgba(255,255,255,0.08)] flex items-center justify-center group-hover:border-[#A78BFA]/40 transition-colors duration-200">
                     <WhatsAppIcon
                       size={18}
-                      className="text-[#888888] group-hover:text-[#25D366] transition-colors duration-200"
+                      className="text-[#888888] group-hover:text-[#A78BFA] transition-colors duration-200"
                     />
                   </div>
                   <span className="text-sm">WhatsApp</span>

@@ -58,11 +58,11 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contactar por WhatsApp"
-                className="group w-10 h-10 flex items-center justify-center border border-[rgba(255,255,255,0.08)] hover:border-[#25D366]/40 transition-colors duration-200"
+                className="group w-10 h-10 flex items-center justify-center border border-[rgba(255,255,255,0.08)] hover:border-[#A78BFA]/40 transition-colors duration-200"
               >
                 <WhatsAppIcon
                   size={18}
-                  className="text-[#888888] group-hover:text-[#25D366] transition-colors duration-200"
+                  className="text-[#888888] group-hover:text-[#A78BFA] transition-colors duration-200"
                 />
               </a>
             </div>

@@ -31,6 +31,7 @@ const projects: Project[] = [
     category: "Sitio web profesional",
     description: "Asesor inmobiliario.",
     url: "https://francisco-di-rago-web.vercel.app/",
+    logo: "/projects/dirago.png",
     span: "col-span-1",
   },
   {
@@ -74,20 +75,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "150px" });
   const hasLink = Boolean(project.url);
+  // Work still in progress is dimmed back; finished work shows at full
+  // strength so the portfolio leads with what's actually live.
+  const inProgress = Boolean(project.badge);
+
+  const logoOpacity = inProgress
+    ? "opacity-[0.22] group-hover:opacity-[0.35]"
+    : "opacity-100";
+  const shotOpacity = inProgress
+    ? "opacity-50 group-hover:opacity-70"
+    : "opacity-100";
 
   const inner = (
     <>
       {/* Background — brand logo when one is provided, else a live screenshot
           for linked projects, else an abstract pattern. */}
       {project.logo ? (
-        <div className="absolute inset-0 flex items-center justify-center p-10 pb-24">
+        <div className="absolute inset-0 flex items-center justify-center p-6 pb-24">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.logo}
             alt=""
             aria-hidden="true"
             loading="lazy"
-            className="max-h-full max-w-[70%] object-contain opacity-[0.22] group-hover:opacity-[0.35] transition-opacity duration-500"
+            className={`max-h-full max-w-[70%] object-contain transition-opacity duration-500 ${logoOpacity}`}
           />
         </div>
       ) : hasLink ? (
@@ -96,7 +107,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           src={screenshotUrl(project.url!)}
           alt={`${project.title} preview`}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover object-top opacity-50 group-hover:opacity-70 transition-opacity duration-500"
+          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ${shotOpacity}`}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
@@ -105,9 +116,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      {/* Dark gradient overlay for legibility */}
+      {/* Dark gradient overlay so the caption stays readable. Lighter on
+          finished work so the artwork itself isn't muted. */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent"
+        className={`absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent ${
+          inProgress ? "via-[#0a0a0a]/70" : "via-[#0a0a0a]/50"
+        }`}
         aria-hidden="true"
       />
 
@@ -151,7 +165,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   // The span classes must live on the grid's direct child (this motion.div),
   // not on the inner anchor, or the grid ignores them and every card
   // collapses to a single column.
-  const wrapperClass = `relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[240px] md:min-h-[320px] ${
+  const wrapperClass = `relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[190px] md:min-h-[250px] ${
     hasLink ? "cursor-pointer hover:border-[#A78BFA]/30" : "cursor-default"
   } transition-colors duration-300`;
 
