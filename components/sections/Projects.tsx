@@ -34,6 +34,15 @@ const projects: Project[] = [
     span: "col-span-1",
   },
   {
+    id: 5,
+    title: "SWAP Podcast",
+    category: "Landing page",
+    description: "Podcast de conversaciones reales.",
+    url: "https://swapodcast.com",
+    logo: "/projects/swap.png",
+    span: "col-span-1 md:col-span-3",
+  },
+  {
     id: 3,
     title: "Sillorno",
     category: "Landing page",
@@ -68,8 +77,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
   const inner = (
     <>
-      {/* Background — screenshot if link exists, abstract pattern otherwise */}
-      {hasLink ? (
+      {/* Background — brand logo when one is provided, else a live screenshot
+          for linked projects, else an abstract pattern. */}
+      {project.logo ? (
+        <div className="absolute inset-0 flex items-center justify-center p-10 pb-24">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.logo}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="max-h-full max-w-[70%] object-contain opacity-[0.22] group-hover:opacity-[0.35] transition-opacity duration-500"
+          />
+        </div>
+      ) : hasLink ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={screenshotUrl(project.url!)}
@@ -78,22 +99,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="absolute inset-0 w-full h-full object-cover object-top opacity-50 group-hover:opacity-70 transition-opacity duration-500"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center p-10 pb-24">
-          {project.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={project.logo}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              className="max-h-full max-w-[70%] object-contain opacity-[0.22] group-hover:opacity-[0.35] transition-opacity duration-500"
-            />
-          ) : (
-            <>
-              <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
-              <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
-            </>
-          )}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
+          <div className="absolute w-12 h-12 border border-[rgba(255,255,255,0.04)] rounded-full" />
         </div>
       )}
 
