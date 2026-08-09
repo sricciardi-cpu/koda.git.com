@@ -16,6 +16,13 @@ type Project = {
   span: string;
 };
 
+// Bento layout: on md+ the grid is 4 columns of 175px-tall rows and each
+// card claims a different footprint, so the section reads as a mosaic and
+// packs into 3 rows with no gaps. Order matters — the spans below assume
+// this sequence fills the grid exactly:
+//   [ Zeus  Zeus ][ SWAP   SWAP  ]
+//   [ Zeus  Zeus ][DiRago][ Sill ]
+//   [ Rove  Rove   Rove   ][ Sill ]
 const projects: Project[] = [
   {
     id: 1,
@@ -23,16 +30,7 @@ const projects: Project[] = [
     category: "E-commerce",
     description: "Tienda online de indumentaria deportiva.",
     url: "https://camisetaszeus.com",
-    span: "col-span-1 md:col-span-2",
-  },
-  {
-    id: 2,
-    title: "Francisco Di Rago",
-    category: "Sitio web profesional",
-    description: "Asesor inmobiliario.",
-    url: "https://francisco-di-rago-web.vercel.app/",
-    logo: "/projects/dirago.png",
-    span: "col-span-1",
+    span: "md:col-span-2 md:row-span-2",
   },
   {
     id: 5,
@@ -41,7 +39,16 @@ const projects: Project[] = [
     description: "Podcast de conversaciones reales.",
     url: "https://swapodcast.com",
     logo: "/projects/swap.png",
-    span: "col-span-1 md:col-span-3",
+    span: "md:col-span-2",
+  },
+  {
+    id: 2,
+    title: "Francisco Di Rago",
+    category: "Sitio web profesional",
+    description: "Asesor inmobiliario.",
+    url: "https://francisco-di-rago-web.vercel.app/",
+    logo: "/projects/dirago.png",
+    span: "md:col-span-1",
   },
   {
     id: 3,
@@ -51,7 +58,7 @@ const projects: Project[] = [
     url: null,
     logo: "/projects/sillorno.png",
     badge: "En producción",
-    span: "col-span-1",
+    span: "md:col-span-1 md:row-span-2",
   },
   {
     id: 4,
@@ -61,7 +68,7 @@ const projects: Project[] = [
     url: null,
     logo: "/projects/rove.png",
     badge: "En producción",
-    span: "col-span-1 md:col-span-2",
+    span: "md:col-span-3",
   },
 ];
 
@@ -91,7 +98,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       {/* Background — brand logo when one is provided, else a live screenshot
           for linked projects, else an abstract pattern. */}
       {project.logo ? (
-        <div className="absolute inset-0 flex items-center justify-center p-6 pb-24">
+        <div className="absolute inset-0 flex items-center justify-center p-5 pb-[86px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.logo}
@@ -165,7 +172,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   // The span classes must live on the grid's direct child (this motion.div),
   // not on the inner anchor, or the grid ignores them and every card
   // collapses to a single column.
-  const wrapperClass = `relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[190px] md:min-h-[250px] ${
+  const wrapperClass = `relative group overflow-hidden border border-[rgba(255,255,255,0.08)] bg-[#111111] min-h-[200px] md:min-h-0 ${
     hasLink ? "cursor-pointer hover:border-[#A78BFA]/30" : "cursor-default"
   } transition-colors duration-300`;
 
@@ -234,7 +241,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[175px] gap-4">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
