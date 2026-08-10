@@ -40,10 +40,15 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Accent glow */}
+      {/* Accent glow. A radial-gradient rather than a blurred circle: a
+          100px filter blur is one of the most expensive things you can ask
+          mobile Safari to composite, and this looks the same for free. */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.06] blur-[100px]"
-        style={{ background: "#A78BFA" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(167,139,250,0.10) 0%, rgba(167,139,250,0.04) 45%, rgba(167,139,250,0) 70%)",
+        }}
         aria-hidden="true"
       />
 

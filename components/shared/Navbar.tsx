@@ -53,12 +53,25 @@ export function Navbar() {
       setActiveId(current);
     };
 
+    // Throttle to one frame. Reading getBoundingClientRect forces layout, and
+    // iOS fires scroll far more often than it paints, so running this raw was
+    // a reflow per event — a real source of scroll jank on phones.
+    let queued = false;
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        compute();
+      });
+    };
+
     compute();
-    window.addEventListener("scroll", compute, { passive: true });
-    window.addEventListener("resize", compute);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      window.removeEventListener("scroll", compute);
-      window.removeEventListener("resize", compute);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
@@ -74,7 +87,10 @@ export function Navbar() {
         }}
       >
         <motion.div
-          className="absolute inset-0 backdrop-blur-md bg-[#0a0a0a]"
+          // backdrop-blur only from md up: on a fixed bar it forces mobile
+          // Safari to re-composite the blur on every scroll frame, and the
+          // backdrop is ~95% opaque anyway so the blur barely shows.
+          className="absolute inset-0 md:backdrop-blur-md bg-[#0a0a0a]"
           style={{ opacity: bgOpacity }}
         />
         <nav className="relative max-w-7xl mx-auto px-5 sm:px-6 h-14 sm:h-16 flex items-center justify-between">

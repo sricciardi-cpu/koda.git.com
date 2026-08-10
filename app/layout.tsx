@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+// No `weight` list on purpose: that pins static cuts, and the site uses
+// 300/500/600 too, which were being synthesised. Omitting it pulls Inter's
+// variable font — one file, every weight.
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["200", "400", "700", "900"],
   variable: "--font-inter",
   display: "swap",
 });
@@ -58,8 +60,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={inter.variable}>
+    // suppressHydrationWarning: the inline script below adds `js` / `hero-go`
+    // to this element before React hydrates, so the server and client class
+    // lists legitimately differ.
+    <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
+        {/* Starts the hero intro one frame after the first paint instead of
+            letting it run off the document timeline — see globals.css. Runs
+            synchronously so `js` lands before anything is drawn; the timeout
+            is a backstop in case rAF never fires (e.g. background tab). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "var d=document.documentElement;d.classList.add('js');" +
+              "var g=function(){d.classList.add('hero-go')};" +
+              "requestAnimationFrame(function(){requestAnimationFrame(g)});" +
+              "setTimeout(g,1200);",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
