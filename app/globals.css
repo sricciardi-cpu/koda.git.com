@@ -123,6 +123,36 @@ body {
   animation: hero-bounce 1.5s ease-in-out infinite;
 }
 
+/* --- Floating WhatsApp button ---------------------------------------- */
+
+@keyframes wa-in {
+  from { transform: scale(0) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);    opacity: 1; }
+}
+/* Holds at full scale through the tail so each ripple is followed by a
+   pause, rather than restarting the moment it fades out. */
+@keyframes wa-pulse {
+  0%  { transform: scale(1);   opacity: 0.4; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100%{ transform: scale(1.4); opacity: 0; }
+}
+
+.js .wa-button { opacity: 0; }
+/* `backwards`, not `both`: holding the final keyframe would keep an
+   animation-level transform on the element forever, which outranks the
+   hover:scale utility and would kill the hover. This way the element is
+   hidden through the delay and hands control back once it's done. */
+.hero-go .wa-button {
+  opacity: 1;
+  animation: wa-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s backwards;
+}
+.wa-pulse {
+  animation: wa-pulse 2s ease-out infinite;
+}
+@media (max-width: 767px) {
+  .hero-go .wa-button { animation-delay: 1.5s; }
+}
+
 /* Slightly snappier on phones */
 @media (max-width: 767px) {
   .hero-letter            { animation-duration: 1.2s; }
