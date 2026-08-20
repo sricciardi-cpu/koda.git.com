@@ -55,9 +55,8 @@ const projects: Project[] = [
     title: "Sillorno",
     category: "Landing page",
     description: "Blanquería y textiles para el hogar.",
-    url: null,
+    url: "https://sillorno-topaz.vercel.app/",
     logo: "/projects/sillorno.png",
-    badge: "En producción",
     span: "md:col-span-1 md:row-span-2",
   },
   {
