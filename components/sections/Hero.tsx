@@ -55,9 +55,11 @@ export function Hero() {
       <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8 w-full max-w-xs sm:max-w-md">
         <AnimatedLogo />
 
-        <p className="hero-fade hero-subtitle text-[#888888] text-xs sm:text-base md:text-lg font-light tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center px-2">
+        {/* Es el h1 de la página: el logo de arriba es una imagen, así que sin
+            esto Google no tenía ningún encabezado principal que leer. */}
+        <h1 className="hero-fade hero-subtitle text-[#888888] text-xs sm:text-base md:text-lg font-light tracking-[0.15em] sm:tracking-[0.2em] uppercase text-center px-2">
           Desarrollo web para los que quieren más
-        </p>
+        </h1>
 
         <div className="hero-fade hero-buttons flex gap-3 w-full">
           <a

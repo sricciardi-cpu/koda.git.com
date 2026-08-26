@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { faqs } from "@/components/sections/Faq";
 
 // No `weight` list on purpose: that pins static cuts, and the site uses
 // 300/500/600 too, which were being synthesised. Omitting it pulls Inter's
@@ -17,14 +18,18 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Koda — Desarrollo web para los que quieren más",
+    default: "Koda — Desarrollo web en La Plata | Sitios a medida y tiendas online",
     template: "%s | Koda",
   },
   description:
-    "Agencia de desarrollo web especializada en sitios a medida, e-commerce, aplicaciones web e identidad digital. Transformamos ideas en productos digitales de alto impacto.",
+    "Agencia de desarrollo web en La Plata. Hacemos sitios a medida, tiendas online y aplicaciones web para comercios y profesionales de City Bell, Gonnet, Berisso y alrededores. Sin plantillas y sin abono de plataforma.",
   keywords: [
+    "desarrollo web La Plata",
+    "diseño web La Plata",
+    "páginas web La Plata",
+    "tienda online La Plata",
+    "agencia web City Bell",
     "desarrollo web",
-    "agencia web",
     "sitios a medida",
     "e-commerce",
     "aplicaciones web",
@@ -38,9 +43,9 @@ export const metadata: Metadata = {
     locale: "es_AR",
     url: "https://www.kodagit.com",
     siteName: "Koda",
-    title: "Koda — Desarrollo web para los que quieren más",
+    title: "Koda — Desarrollo web en La Plata",
     description:
-      "Agencia de desarrollo web especializada en sitios a medida, e-commerce, aplicaciones web e identidad digital.",
+      "Sitios a medida, tiendas online y aplicaciones web para comercios y profesionales de La Plata y alrededores.",
   },
   twitter: {
     card: "summary_large_image",
@@ -83,11 +88,56 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              // ProfessionalService en vez de Organization: le dice a Google que
+              // esto es un negocio que atiende una zona, no una marca global.
+              "@type": "ProfessionalService",
               name: "Koda",
               url: "https://www.kodagit.com",
               description:
-                "Agencia de desarrollo web especializada en sitios a medida, e-commerce, aplicaciones web e identidad digital.",
+                "Agencia de desarrollo web en La Plata. Sitios a medida, tiendas online, aplicaciones web e identidad digital.",
+              image: "https://www.kodagit.com/icon.png",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "La Plata",
+                addressRegion: "Buenos Aires",
+                addressCountry: "AR",
+              },
+              areaServed: [
+                { "@type": "City", name: "La Plata" },
+                { "@type": "City", name: "City Bell" },
+                { "@type": "City", name: "Gonnet" },
+                { "@type": "City", name: "Berisso" },
+                { "@type": "City", name: "Ensenada" },
+              ],
+              knowsLanguage: "es-AR",
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Servicios",
+                itemListElement: [
+                  "Desarrollo de sitios web a medida",
+                  "Tiendas online",
+                  "Aplicaciones web",
+                  "Identidad digital",
+                ].map((n) => ({
+                  "@type": "Offer",
+                  itemOffered: { "@type": "Service", name: n },
+                })),
+              },
               sameAs: ["https://instagram.com/koda.git"],
             }),
           }}
