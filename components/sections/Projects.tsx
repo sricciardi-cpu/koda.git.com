@@ -64,9 +64,8 @@ const projects: Project[] = [
     title: "Rove",
     category: "E-commerce",
     description: "Tienda online de perfumes.",
-    url: null,
+    url: "https://roveperfumeria.com",
     logo: "/projects/rove.png",
-    badge: "En producción",
     span: "md:col-span-3",
   },
 ];
