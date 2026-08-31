@@ -10,8 +10,10 @@ type Project = {
   category: string;
   description: string;
   url: string | null;
-  /** Brand logo shown darkened behind cards that have no live URL yet. */
+  /** Brand logo, centred with padding. */
   logo?: string;
+  /** Artwork that fills the whole card, like a screenshot does. Wins over logo. */
+  cover?: string;
   badge?: string;
   span: string;
 };
@@ -65,7 +67,7 @@ const projects: Project[] = [
     category: "E-commerce",
     description: "Tienda online de perfumes.",
     url: "https://roveperfumeria.com",
-    logo: "/projects/rove.png",
+    cover: "/projects/rove-cover.jpg",
     span: "md:col-span-3",
   },
 ];
@@ -95,7 +97,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <>
       {/* Background — brand logo when one is provided, else a live screenshot
           for linked projects, else an abstract pattern. */}
-      {project.logo ? (
+      {project.cover ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={project.cover}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${shotOpacity}`}
+        />
+      ) : project.logo ? (
         <div className="absolute inset-0 flex items-center justify-center p-5 pb-[86px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
