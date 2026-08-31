@@ -18,13 +18,14 @@ type Project = {
   span: string;
 };
 
-// Bento layout: on md+ the grid is 4 columns of 175px-tall rows and each
-// card claims a different footprint, so the section reads as a mosaic and
-// packs into 3 rows with no gaps. Order matters — the spans below assume
-// this sequence fills the grid exactly:
-//   [ Zeus  Zeus ][ SWAP   SWAP  ]
-//   [ Zeus  Zeus ][DiRago][ Sill ]
-//   [ Rove  Rove   Rove   ][ Sill ]
+// Bento layout on md+: 4 columns over 175px rows, filling 4 rows with no
+// gaps. Sillorno and Rove get two rows each because they show their actual
+// site — a screenshot squeezed into a single row lands as an unreadable
+// strip. Order matters, the spans assume this exact sequence:
+//   [ Zeus  Zeus ][ SWAP    SWAP   ]
+//   [ Zeus  Zeus ][ DiRago  DiRago ]
+//   [ Sill  Sill ][ Rove    Rove   ]
+//   [ Sill  Sill ][ Rove    Rove   ]
 const projects: Project[] = [
   {
     id: 1,
@@ -50,7 +51,7 @@ const projects: Project[] = [
     description: "Asesor inmobiliario.",
     url: "https://francisco-di-rago-web.vercel.app/",
     logo: "/projects/dirago.png",
-    span: "md:col-span-1",
+    span: "md:col-span-2",
   },
   {
     id: 3,
@@ -58,8 +59,8 @@ const projects: Project[] = [
     category: "Landing page",
     description: "Blanquería y textiles para el hogar.",
     url: "https://sillorno-topaz.vercel.app/",
-    logo: "/projects/sillorno.png",
-    span: "md:col-span-1 md:row-span-2",
+    cover: "/projects/sillorno-cover.jpg",
+    span: "md:col-span-2 md:row-span-2",
   },
   {
     id: 4,
@@ -68,7 +69,7 @@ const projects: Project[] = [
     description: "Tienda online de perfumes.",
     url: "https://roveperfumeria.com",
     cover: "/projects/rove-cover.jpg",
-    span: "md:col-span-3",
+    span: "md:col-span-2 md:row-span-2",
   },
 ];
 
