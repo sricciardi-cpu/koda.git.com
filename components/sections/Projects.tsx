@@ -18,14 +18,16 @@ type Project = {
   span: string;
 };
 
-// Bento layout on md+: 4 columns over 175px rows, filling 4 rows with no
-// gaps. Sillorno and Rove get two rows each because they show their actual
-// site — a screenshot squeezed into a single row lands as an unreadable
-// strip. Order matters, the spans assume this exact sequence:
-//   [ Zeus  Zeus ][ SWAP    SWAP   ]
-//   [ Zeus  Zeus ][ DiRago  DiRago ]
-//   [ Sill  Sill ][ Rove    Rove   ]
-//   [ Sill  Sill ][ Rove    Rove   ]
+// Bento layout on md+: 4 columns over 175px rows, filling 5 rows with no
+// gaps. Everything that shows its actual site gets two rows — a screenshot
+// squeezed into a single row lands as an unreadable strip — and the two
+// logo cards close the grid. Order matters, the spans assume this exact
+// sequence:
+//   [ Zeus  Zeus ][ Sill   Sill   ]
+//   [ Zeus  Zeus ][ Sill   Sill   ]
+//   [ Rove  Rove ][ Aseso  Aseso  ]
+//   [ Rove  Rove ][ Aseso  Aseso  ]
+//   [ SWAP  SWAP ][ DiRago DiRago ]
 const projects: Project[] = [
   {
     id: 1,
@@ -33,6 +35,32 @@ const projects: Project[] = [
     category: "E-commerce",
     description: "Tienda online de indumentaria deportiva.",
     url: "https://camisetaszeus.com",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 3,
+    title: "Sillorno",
+    category: "Landing page",
+    description: "Blanquería y textiles para el hogar.",
+    url: "https://sillorno-topaz.vercel.app/",
+    cover: "/projects/sillorno-cover.jpg",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 4,
+    title: "Rove",
+    category: "E-commerce",
+    description: "Tienda online de perfumes.",
+    url: "https://roveperfumeria.com",
+    cover: "/projects/rove-cover.jpg",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 6,
+    title: "Asesoría La Plata",
+    category: "Sitio web profesional",
+    description: "Asesoría jurídica, administrativa y notarial.",
+    url: "https://asesoria-laplata.vercel.app",
     span: "md:col-span-2 md:row-span-2",
   },
   {
@@ -52,24 +80,6 @@ const projects: Project[] = [
     url: "https://francisco-di-rago-web.vercel.app/",
     logo: "/projects/dirago.png",
     span: "md:col-span-2",
-  },
-  {
-    id: 3,
-    title: "Sillorno",
-    category: "Landing page",
-    description: "Blanquería y textiles para el hogar.",
-    url: "https://sillorno-topaz.vercel.app/",
-    cover: "/projects/sillorno-cover.jpg",
-    span: "md:col-span-2 md:row-span-2",
-  },
-  {
-    id: 4,
-    title: "Rove",
-    category: "E-commerce",
-    description: "Tienda online de perfumes.",
-    url: "https://roveperfumeria.com",
-    cover: "/projects/rove-cover.jpg",
-    span: "md:col-span-2 md:row-span-2",
   },
 ];
 
