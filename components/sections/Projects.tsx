@@ -35,6 +35,7 @@ const projects: Project[] = [
     category: "E-commerce",
     description: "Tienda online de indumentaria deportiva.",
     url: "https://camisetaszeus.com",
+    cover: "/projects/zeus-cover.jpg",
     span: "md:col-span-2 md:row-span-2",
   },
   {
@@ -61,6 +62,7 @@ const projects: Project[] = [
     category: "Sitio web profesional",
     description: "Asesoría jurídica, administrativa y notarial.",
     url: "https://asesoria-laplata.vercel.app",
+    cover: "/projects/asesoria-cover.jpg",
     span: "md:col-span-2 md:row-span-2",
   },
   {
@@ -83,12 +85,6 @@ const projects: Project[] = [
   },
 ];
 
-// Microlink — free tier (50 req/day per IP), no API key.
-// embed=screenshot.url makes the endpoint return the PNG directly.
-function screenshotUrl(url: string) {
-  return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`;
-}
-
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "150px" });
@@ -106,8 +102,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
   const inner = (
     <>
-      {/* Background — brand logo when one is provided, else a live screenshot
-          for linked projects, else an abstract pattern. */}
+      {/* Background — the site's own artwork when there's a cover, else the
+          brand logo, else an abstract pattern. Covers are captured once and
+          committed on purpose: this used to fetch a live screenshot from
+          Microlink on every page load, which burned through the free quota
+          (50/day per IP) and timed out on heavier sites, leaving cards
+          blank. */}
       {project.cover ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -128,14 +128,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className={`max-h-full max-w-[70%] object-contain transition-opacity duration-500 ${logoOpacity}`}
           />
         </div>
-      ) : hasLink ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={screenshotUrl(project.url!)}
-          alt={`${project.title} preview`}
-          loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ${shotOpacity}`}
-        />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-24 h-24 border border-[rgba(255,255,255,0.06)] rounded-full" />
