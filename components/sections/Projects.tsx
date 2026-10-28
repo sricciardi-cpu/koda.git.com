@@ -23,11 +23,12 @@ type Project = {
 // squeezed into a single row lands as an unreadable strip — and the two
 // logo cards close the grid. Order matters, the spans assume this exact
 // sequence:
-//   [ Zeus  Zeus ][ Sill   Sill   ]
-//   [ Zeus  Zeus ][ Sill   Sill   ]
-//   [ Rove  Rove ][ Aseso  Aseso  ]
-//   [ Rove  Rove ][ Aseso  Aseso  ]
-//   [ SWAP  SWAP ][ DiRago DiRago ]
+//   [ Zeus   Zeus   ][ Sill   Sill   ]
+//   [ Zeus   Zeus   ][ Sill   Sill   ]
+//   [ Rove   Rove   ][ Aseso  Aseso  ]
+//   [ Rove   Rove   ][ Aseso  Aseso  ]
+//   [ Vitals Vitals ][ SWAP   SWAP   ]
+//   [ Vitals Vitals ][ DiRago DiRago ]
 const projects: Project[] = [
   {
     id: 1,
@@ -63,6 +64,15 @@ const projects: Project[] = [
     description: "Asesoría jurídica, administrativa y notarial.",
     url: "https://asesoria-laplata.vercel.app",
     cover: "/projects/asesoria-cover.jpg",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    id: 7,
+    title: "Koda Vitals",
+    category: "Aplicación web",
+    description: "Panel de glucosa, sueño y entrenamiento.",
+    url: "https://kodavitals.vercel.app",
+    cover: "/projects/vitals-cover.jpg",
     span: "md:col-span-2 md:row-span-2",
   },
   {
