@@ -112,6 +112,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "150px" });
   const hasLink = Boolean(project.url);
+  // Lo que sigue en proceso va atenuado, con la etiqueta centrada encima;
+  // lo terminado se muestra entero.
+  const inProgress = Boolean(project.badge);
+
+  const logoOpacity = inProgress
+    ? "opacity-[0.22] group-hover:opacity-[0.35]"
+    : "opacity-100";
+  const shotOpacity = inProgress
+    ? "opacity-50 group-hover:opacity-70"
+    : "opacity-100";
 
   const inner = (
     <>
@@ -128,7 +138,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${shotOpacity}`}
         />
       ) : project.logo ? (
         <div className="absolute inset-0 flex items-center justify-center p-5 pb-[86px]">
@@ -138,7 +148,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             alt=""
             aria-hidden="true"
             loading="lazy"
-            className="max-h-full max-w-[70%] object-contain"
+            className={`max-h-full max-w-[70%] object-contain transition-opacity duration-500 ${logoOpacity}`}
           />
         </div>
       ) : (
@@ -148,9 +158,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      {/* Dark gradient overlay so the caption stays readable. */}
+      {/* Dark gradient overlay so the caption stays readable. Más marcado
+          sobre lo que está en proceso, que ya va atenuado de por sí. */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent"
+        className={`absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent ${
+          inProgress ? "via-[#0a0a0a]/70" : "via-[#0a0a0a]/50"
+        }`}
         aria-hidden="true"
       />
 
@@ -160,11 +173,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         aria-hidden="true"
       />
 
-      {/* Badge top-right (only when no link) */}
+      {/* Etiqueta de estado, centrada sobre la portada atenuada */}
       {project.badge && (
-        <div className="absolute top-5 right-5 flex items-center gap-1.5 bg-[#A78BFA]/10 border border-[#A78BFA]/30 text-[#A78BFA] text-[10px] font-medium uppercase tracking-widest px-2.5 py-1">
-          <Clock size={11} />
-          {project.badge}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="flex items-center gap-2 bg-[#A78BFA]/10 border border-[#A78BFA]/30 text-[#A78BFA] text-[11px] font-medium uppercase tracking-widest px-4 py-2 backdrop-blur-sm">
+            <Clock size={12} />
+            {project.badge}
+          </div>
         </div>
       )}
 
