@@ -27,8 +27,9 @@ type Project = {
 //   [ Zeus   Zeus   ][ Sill   Sill   ]
 //   [ Rove   Rove   ][ Aseso  Aseso  ]
 //   [ Rove   Rove   ][ Aseso  Aseso  ]
-//   [ Vitals Vitals ][ SWAP   SWAP   ]
-//   [ Vitals Vitals ][ DiRago DiRago ]
+//   [ Vitals Vitals ][ Offs   Offs   ]
+//   [ Vitals Vitals ][ Offs   Offs   ]
+//   [ SWAP   SWAP   ][ DiRago DiRago ]
 const projects: Project[] = [
   {
     id: 1,
@@ -76,6 +77,18 @@ const projects: Project[] = [
     span: "md:col-span-2 md:row-span-2",
   },
   {
+    id: 8,
+    title: "Offside Store",
+    category: "E-commerce",
+    description: "Tienda de camisetas de fútbol.",
+    // Sin link a propósito: todavía no está terminada, así que la tarjeta
+    // muestra la portada pero no lleva a ningún lado.
+    url: null,
+    cover: "/projects/offside-cover.jpg",
+    badge: "En proceso",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
     id: 5,
     title: "SWAP Podcast",
     category: "Landing page",
@@ -99,16 +112,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "150px" });
   const hasLink = Boolean(project.url);
-  // Work still in progress is dimmed back; finished work shows at full
-  // strength so the portfolio leads with what's actually live.
-  const inProgress = Boolean(project.badge);
-
-  const logoOpacity = inProgress
-    ? "opacity-[0.22] group-hover:opacity-[0.35]"
-    : "opacity-100";
-  const shotOpacity = inProgress
-    ? "opacity-50 group-hover:opacity-70"
-    : "opacity-100";
 
   const inner = (
     <>
@@ -125,7 +128,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${shotOpacity}`}
+          className="absolute inset-0 w-full h-full object-cover"
         />
       ) : project.logo ? (
         <div className="absolute inset-0 flex items-center justify-center p-5 pb-[86px]">
@@ -135,7 +138,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             alt=""
             aria-hidden="true"
             loading="lazy"
-            className={`max-h-full max-w-[70%] object-contain transition-opacity duration-500 ${logoOpacity}`}
+            className="max-h-full max-w-[70%] object-contain"
           />
         </div>
       ) : (
@@ -145,12 +148,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       )}
 
-      {/* Dark gradient overlay so the caption stays readable. Lighter on
-          finished work so the artwork itself isn't muted. */}
+      {/* Dark gradient overlay so the caption stays readable. */}
       <div
-        className={`absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent ${
-          inProgress ? "via-[#0a0a0a]/70" : "via-[#0a0a0a]/50"
-        }`}
+        className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent"
         aria-hidden="true"
       />
 
